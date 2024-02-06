@@ -4,6 +4,7 @@ import com.platzi.pizza.persistence.entity.PizzaEntity;
 import com.platzi.pizza.persistence.repository.PizzaPagSortRepository;
 import com.platzi.pizza.persistence.repository.PizzaRepository;
 import com.platzi.pizza.service.dto.UpdatePizzaPriceDto;
+import com.platzi.pizza.service.exception.EmailApiException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -69,9 +70,24 @@ public class PizzaService {
         this.pizzaRepository.deleteById(idPizza);
     }
 
-    @Transactional
+    /** Propiedades ACID
+    * A "Atomicity" : todo o nada, una transacción no debe quedar a la mitad, se debe garantizar que si ocurre un error en la mitad del proceso se haga rollback, si fue exitosa debe quedar persistida la información
+    * C "Consistency" : esta vela por que solo se realicen transaciones con operaciones que garanticen la integridad de la información, ejem: no usar key que no exista haciendo movientos en otras tablas que las usen
+    * I "Isolation" : aislamiento, se debe garantizar que las transacciones se ejecuten de una manera independiente a otras que esten ocurriendo, para que la información no se mezcle o quede incompleta
+    * D "Durability" : Garantizar que las transacciones sean persistibles en el tiempo, que si bajo la db y la vuelvo a subir la información previa siga existiendo
+     *
+     * Estos principios se resuelven con @Transactional Permite garantizar las 4 caracteristicas a continuación ejemplo
+     * También esta anotación se le pueden enviar atributos ejemplo noRollbackFor, para que omita ese proceso si falla y no haga rollback
+    */
+
+    @Transactional(noRollbackFor = EmailApiException.class)
     public void updatePrice(UpdatePizzaPriceDto dto) {
         this.pizzaRepository.updatePrice(dto);
+        this.sendEmail();
+    }
+
+    private void sendEmail() {
+        throw new EmailApiException();
     }
 
     public boolean exists(int idPizza) {
