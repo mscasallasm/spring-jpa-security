@@ -64,3 +64,10 @@ VALUES
 (5, 1, 10, 0.5, 11.0),
 (5, 2, 12, 0.5, 9.5),
 (6, 1, 11, 1, 23);
+
+
+-- INSERT USERS
+-- El password se genera en https://bcrypt.online/
+-- admin -> admin123
+-- customer -> customer123
+INSERT INTO `user` (`username`, `disable`, `email`, `locked`, `password`) VALUES ('admin', '0', 'admin@platzi.com', '0', '$2y$10$8Io0kpklxm2UulUDN4ZiRuMqfd/4FQMsqO.W3y5Qh47zeAADf/kh.'), ('customer', '0', 'customer@platzi.com', '0', '$2y$10$/nlJS.fiTi6XQj6J3bdzW.aqutZto5TSapUbQzLNN7o6jqUUBauGW');
