@@ -71,3 +71,7 @@ VALUES
 -- admin -> admin123
 -- customer -> customer123
 INSERT INTO `user` (`username`, `disable`, `email`, `locked`, `password`) VALUES ('admin', '0', 'admin@platzi.com', '0', '$2y$10$8Io0kpklxm2UulUDN4ZiRuMqfd/4FQMsqO.W3y5Qh47zeAADf/kh.'), ('customer', '0', 'customer@platzi.com', '0', '$2y$10$/nlJS.fiTi6XQj6J3bdzW.aqutZto5TSapUbQzLNN7o6jqUUBauGW');
+
+
+-- INSERT USERS ROLE
+INSERT INTO `user_role` (`role`, `username`, `granted_date`) VALUES ('ADMIN', 'admin', '2024-02-15 11:09:17'), ('CUSTOMER', 'customer', '2024-02-15 11:09:17');
