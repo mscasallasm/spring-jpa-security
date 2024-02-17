@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
-public class JstUtil {
+public class JwtUtil {
     private static String SECRET_KEY = "pl4tz1_p1zz4";
     private static Algorithm ALGORITHM = Algorithm.HMAC256(SECRET_KEY);
 
